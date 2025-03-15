@@ -41,7 +41,7 @@ This repository is dedicated to studying and integrating topics related to **Alg
 **中文**  
 1. **克隆仓库**：
    ```bash
-   git clone git@github.com:<YourUsername>/Algorithm-Game-Theory.git
+   git clone git@github.com:GeoffreyWang1117/Algorithm-Game-Theory.git
    ```
 2. **安装依赖**（以 Python 举例）：
    ```bash
