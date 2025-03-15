@@ -6,7 +6,7 @@
 This repository is dedicated to studying and integrating topics related to **Algorithmic Game Theory**. We will explore core concepts such as Nash Equilibrium, Mechanism Design, Auctions, Cost-Sharing, and other relevant areas. The goal is to consolidate learning resources, solutions, and insights into a single, organized location.
 
 **中文**  
-本项目主要用于学习并整合 **算法博弈论（Algorithmic Game Theory）** 相关内容。我们将深入研究博弈论的核心概念，如纳什均衡（Nash Equilibrium）、机制设计（Mechanism Design）、拍卖理论（Auctions）、成本分摊（Cost-Sharing）以及其它相关主题，旨在将学习资料、解决方案和心得整合到一个有序的仓库中。
+本项目主要用于学习并整合 **算法博弈论（Algorithmic Game Theory）** 相关内容。我将深入研究博弈论的核心概念，如纳什均衡（Nash Equilibrium）、机制设计（Mechanism Design）、拍卖理论（Auctions）、成本分摊（Cost-Sharing）以及其它相关主题，旨在将学习资料、解决方案和心得整合到一个有序的仓库中。
 
 ### 2. Project Structure / 项目结构
 
@@ -76,7 +76,7 @@ This repository is dedicated to studying and integrating topics related to **Alg
 
 **中文**  
 - 欢迎提交 Pull Request，提出问题或改进建议。  
-- 如果发现 Bug、想要添加新的主题或优化算法，请通过 Issue 或 Pull Request 与我们讨论。
+- 如果发现 Bug、想要添加新的主题或优化算法，请通过 Issue 或 Pull Request 与我讨论。
 
 ### 6. License / 许可协议
 
