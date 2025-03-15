@@ -1,0 +1,232 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{Solutions to Nash Equilibrium Problems}
+\author{Zhaohui Wang}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Solution to Problem 1.1}
+
+To find a Nash equilibrium for a two-player game defined by a game matrix, we present a finite algorithm:
+
+\begin{enumerate}
+    \item \textbf{Enumerate all strategy combinations:} Suppose player 1 has $m$ strategies and player 2 has $n$ strategies. There are $m \times n$ possible pure strategy combinations.
+    \item \textbf{Check the Nash equilibrium condition:} For each combination $(s_1, s_2)$, compute:
+    \begin{itemize}
+        \item The payoff $U_1(s_1, s_2)$ for player 1 choosing $s_1$.
+        \item The payoff $U_2(s_1, s_2)$ for player 2 choosing $s_2$.
+    \end{itemize}
+    Verify that neither player benefits from unilateral deviation:
+    \begin{itemize}
+        \item If there exists an $s_1'$ such that $U_1(s_1', s_2) > U_1(s_1, s_2)$, then $(s_1, s_2)$ is not a Nash equilibrium.
+        \item If there exists an $s_2'$ such that $U_2(s_1, s_2') > U_2(s_1, s_2)$, then $(s_1, s_2)$ is not a Nash equilibrium.
+    \end{itemize}
+    \item \textbf{Complexity:} This brute-force approach has a complexity of $O(mn)$. Finding mixed strategy equilibria generally requires algorithms such as Lemke-Howson or linear programming, which may run in exponential time.
+\end{enumerate}
+
+\section*{Solution to Problem 1.2}
+
+Consider a two-player game where each player has $n$ strategies. The payoffs are selected independently and uniformly at random from $[0,1]$. We show that the probability of a pure Nash equilibrium approaches $1 - \frac{1}{e}$ as $n \to \infty$.
+
+\begin{enumerate}
+    \item \textbf{A strategy combination $(i,j)$ is a pure Nash equilibrium if:}
+    \begin{itemize}
+        \item $U_1(i,j)$ is the maximum in row $i$.
+        \item $U_2(i,j)$ is the maximum in column $j$.
+    \end{itemize}
+    \item The probability that $U_1(i,j)$ is the maximum in row $i$ is $\frac{1}{n}$, and similarly, the probability that $U_2(i,j)$ is the maximum in column $j$ is $\frac{1}{n}$. Since these are independent,
+    \[
+    P((i,j) \text{ is a Nash equilibrium}) = \frac{1}{n} \times \frac{1}{n} = \frac{1}{n^2}.
+    \]
+    \item There are $n^2$ strategy pairs, so the probability that at least one is a Nash equilibrium is:
+    \[
+    P(\text{at least one Nash equilibrium}) = 1 - \left(1 - \frac{1}{n^2}\right)^{n^2}.
+    \]
+    \item Taking the limit as $n \to \infty$:
+    \[
+    \lim_{n \to \infty} \left(1 - \frac{1}{n^2}\right)^{n^2} = \frac{1}{e}.
+    \]
+    \item Thus, the probability that a Nash equilibrium exists is approximately $1 - \frac{1}{e}$ for large $n$.
+\end{enumerate}
+
+\section*{Solution to Problem 1.3}
+
+We examine why finding a Nash equilibrium in a three-person zero-sum game is at least as hard as in general two-player games.
+
+\begin{itemize}
+    \item \textbf{Two-player zero-sum games:} Nash equilibria can be computed efficiently using linear programming (polynomial time).
+    \item \textbf{General two-player games:} Computing a Nash equilibrium is PPAD-complete, which is believed to be harder than polynomial-time solvable problems.
+    \item \textbf{Three-player zero-sum games:} The total sum of payoffs remains zero, but each player's best response depends on the other two players, making the structure more complex.
+    \item \textbf{Computational hardness:} Finding a Nash equilibrium in three-player zero-sum games requires solving general non-zero-sum games, which are PPAD-complete. Thus, the problem is at least as hard as finding a Nash equilibrium in a general two-player game.
+\end{itemize}
+
+\section*{Solution to Problem 1.4}
+
+Consider an $n$-player game where each player has only two pure strategies, and the game's structure is represented as a tree graph $G$ with a maximum degree of 3. We need to design a polynomial-time algorithm to determine whether a pure Nash equilibrium exists in this game.
+
+\subsection*{Algorithm Design}
+
+The problem can be efficiently solved using a \textbf{tree-based dynamic programming (Tree DP)} approach. Since $G$ is a tree, it has no cycles, allowing us to use depth-first search (DFS) to process the tree efficiently.
+
+\textbf{Key Idea:} Each node (player) in the tree has a payoff that depends on its strategy and the strategies of its neighbors. We traverse the tree in a bottom-up manner, ensuring that each player's best response is stable given its neighbors' choices.
+
+\textbf{Algorithm Steps:}
+\begin{enumerate}
+    \item Select an arbitrary node as the root and traverse the tree using DFS.
+    \item For each node $i$ with parent $p$, check the best strategy responses based on the payoffs.
+    \item Propagate valid strategy choices upward to ensure that each subtree remains stable.
+    \item If a valid assignment of strategies exists such that no player wants to deviate, then a pure Nash equilibrium exists.
+\end{enumerate}
+
+\subsection*{Time and Space Complexity Analysis}
+- Since $G$ is a tree with $n$ nodes, DFS runs in $O(n)$ time.
+- Each node has at most two possible strategy choices, leading to a constant factor check for each node.
+- The overall time complexity is $O(n)$.
+- Space complexity is also $O(n)$, as we store player strategies and the dependency graph.
+
+Thus, the algorithm runs efficiently in polynomial time.
+
+\section*{Solution to Problem 1.5}
+
+Consider an $n$-player symmetric game where each player has two strategies: ``on'' and ``off.'' The game's payoff is determined by a function dependent only on the number of other players choosing ``on.'' We aim to design a polynomial-time algorithm to compute a \textbf{correlated equilibrium} (CE) for this game.
+
+\subsection*{Mathematical Formulation}
+
+A correlated equilibrium is a probability distribution over strategy profiles such that no player has an incentive to deviate unilaterally. Given:
+\begin{itemize}
+    \item $u_{on}(k)$: Payoff for playing ``on'' when $k$ other players also play ``on.''
+    \item $u_{off}(k)$: Payoff for playing ``off'' when $k$ other players also play ``on.''
+\end{itemize}
+
+The goal is to find a probability distribution $P(s)$ over strategy profiles such that for all players:
+\[
+\mathbb{E}[U_i | s_i] \geq \mathbb{E}[U_i | s_i']
+\]
+where $U_i$ is the expected utility given a recommended strategy $s_i$.
+
+\subsection*{Algorithm Using Linear Programming}
+
+\begin{enumerate}
+    \item Define a probability variable $P(s)$ for each possible strategy profile.
+    \item Set up linear constraints ensuring that each player's expected utility from following their recommended strategy is at least as high as any unilateral deviation.
+    \item Solve the resulting linear program (LP) to find an optimal probability distribution.
+\end{enumerate}
+
+\subsection*{Complexity Analysis}
+
+- The number of constraints in the LP is proportional to $O(n 2^n)$ due to the number of strategy profiles.
+- Solving an LP takes at most polynomial time in the number of constraints, leading to an overall complexity of $O(n^2)$ for practical input sizes.
+- Space complexity is $O(2^n)$ due to storage of probability distributions.
+
+Thus, the approach efficiently finds a correlated equilibrium in polynomial time.
+
+\section*{Solution to Problem 1.6}
+
+\subsection*{Problem Analysis}
+Consider a 2-player game in matrix form where each player has $n$ pure strategies. In a Nash equilibrium, players may use mixed strategies with nonzero probability assigned to many pure strategies. The objective is to show that an $\epsilon$-approximate Nash equilibrium can be constructed where each player plays a strategy with a support of size at most $O(\log n)$.
+
+\subsection*{Model Assumptions}
+Let $p^j$ represent the mixed strategy of player $j$, where $p_i^j$ is the probability of using the $i$-th pure strategy. The support of $p^j$ is defined as:
+\[
+S^j = \{ i : p_i^j > 0 \}
+\]
+An $\epsilon$-approximate Nash equilibrium satisfies that for both players, no alternative strategy $\tilde{p}^j$ improves expected payoff by more than $\epsilon M$, where $M$ is the maximum possible payoff.
+
+\subsection*{Mathematical Derivation}
+\begin{enumerate}
+    \item Start with any Nash equilibrium where players use mixed strategies.
+    \item Identify the most significant $O(\log n)$ strategies contributing to the expected payoff.
+    \item Construct a new mixed strategy by choosing from these $O(\log n)$ strategies with uniform probability.
+    \item Show that this approximation introduces at most an $\epsilon M$ loss in expected payoff.
+\end{enumerate}
+
+\subsection*{Algorithm Construction}
+\begin{itemize}
+    \item Extract a Nash equilibrium mixed strategy.
+    \item Reduce the support to the most influential $O(\log n)$ pure strategies.
+    \item Randomly select one of these strategies with uniform probability.
+\end{itemize}
+
+\subsection*{Time and Space Complexity Analysis}
+- Finding a Nash equilibrium is PPAD-complete, but reducing the support has complexity $O(n)$.
+- Constructing the approximate strategy takes $O(\log n)$ operations.
+- Overall complexity is $O(n)$.
+
+\section*{Solution to Problem 1.7}
+
+\subsection*{Problem Analysis}
+The classical Bertrand competition involves $n$ firms producing the same product and competing in quantity. The price $p(q)$ follows a demand-price function, which is monotonically decreasing and differentiable.
+
+\subsection*{Model Assumptions}
+\begin{itemize}
+    \item Each firm $i$ produces quantity $q_i$, and total supply is $q = \sum q_i$.
+    \item The price adjusts according to a function $p(d)$, e.g., $p(d) = 1 - d$.
+    \item Each firm maximizes its revenue $q_i p(q)$.
+\end{itemize}
+
+\subsection*{Mathematical Derivation}
+\begin{enumerate}
+    \item (a) Monopolist vs. Competition:
+    \begin{itemize}
+        \item A single firm chooses $q_m$ to maximize $q_m p(q_m)$.
+        \item With $n$ firms, each firm optimizes $q_i p(q)$.
+        \item Compare revenue under both cases to show monopolist advantage.
+    \end{itemize}
+    \item (b) Second derivative condition:
+    \begin{itemize}
+        \item Assume $p''(d) \leq 0$.
+        \item Show that monopolistic income is at most $n$ times the competitive income.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Algorithm Construction}
+\begin{itemize}
+    \item Compute competitive equilibrium quantities for all firms.
+    \item Compute monopoly optimal production.
+    \item Compare revenues.
+\end{itemize}
+
+\subsection*{Time and Space Complexity Analysis}
+- Finding competitive equilibrium takes $O(n)$.
+- Computing monopoly outcome is $O(1)$.
+- Overall complexity: $O(n)$.
+
+\section*{Solution to Problem 1.8}
+
+\subsection*{Problem Analysis}
+A minimum spanning tree (MST) game involves $n$ agents and a graph $G = (V, E)$ with edge costs. The goal is to find a budget-balanced cost-sharing method for constructing an MST that lies in the core.
+
+\subsection*{Model Assumptions}
+\begin{itemize}
+    \item Graph $G$ is complete with edge costs satisfying the triangle inequality.
+    \item MST $T$ is rooted at node 0.
+    \item The cost of an agent is the first edge in the path to 0 in $T$.
+\end{itemize}
+
+\subsection*{Mathematical Derivation}
+\begin{itemize}
+    \item Construct $T$ using Prim’s or Kruskal’s algorithm.
+    \item Assign costs based on the first edge in the unique path to the root.
+    \item Show that the sum of assigned costs equals the MST cost.
+    \item Prove that any subset $S$ of agents is charged at most $c(S)$.
+\end{itemize}
+
+\subsection*{Algorithm Construction}
+\begin{itemize}
+    \item Compute MST using Kruskal’s or Prim’s algorithm.
+    \item Assign costs to agents based on their first connecting edge.
+    \item Verify core constraints.
+\end{itemize}
+
+\subsection*{Time and Space Complexity Analysis}
+- MST computation: $O(m \log n)$.
+- Cost assignment: $O(n)$.
+- Overall complexity: $O(m \log n)$. 
+
+\end{document}

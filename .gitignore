@@ -1,0 +1,29 @@
+__pycache__/
+*.pyc
+
+# Latex中间文件
+**/*.aux
+**/*.log
+**/*.out
+**/*.toc
+**/*.lof
+**/*.lot
+**/*.fls
+**/*.fdb_latexmk
+**/*.bbl
+**/*.blg
+**/*.synctex.gz
+**/*.synctex(busy).gz
+**/*.dvi
+
+# 如果只想保留 .pdf, .py, .tex 文件，其他全部忽略
+# 可以先忽略所有文件，再反向添加需要的文件类型
+# （下面两行会忽略所有文件和目录，除了 .gitignore 自身）
+*
+!*/
+!.gitignore
+
+# 允许 .pdf, .py, .tex 文件
+!*.pdf
+!*.py
+!*.tex
