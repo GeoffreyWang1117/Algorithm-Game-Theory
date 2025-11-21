@@ -1,0 +1,45 @@
+# Data directories
+*/data/raw/
+*/data/processed/
+*/data/external/
+
+# Model files
+*/models/*.pkl
+*/models/*.h5
+*/models/*.pth
+
+# Output directories
+*/outputs/
+*/experiments/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
