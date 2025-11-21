@@ -82,7 +82,11 @@ class AlgoGameTheoryTool:
             '02_nash_equilibrium': '第二章：纳什均衡',
             '03_mixed_strategies': '第三章：混合策略',
             '04_auctions': '第四章：拍卖理论',
-            '05_mechanism_design': '第五章：机制设计'
+            '05_mechanism_design': '第五章：机制设计',
+            '06_efficiency': '第六章：效率与社会福利',
+            '07_cooperative_games': '第七章：协同博弈',
+            '08_matching': '第八章：匹配理论',
+            '09_potential_games': '第九章：势博弈'
         }
         return category_names.get(category, category)
 

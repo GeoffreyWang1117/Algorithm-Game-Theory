@@ -43,6 +43,18 @@
 #### 第五章：机制设计
 - `mechanism01_vcg` - VCG 机制（Vickrey-Clarke-Groves）
 
+#### 第六章：效率与社会福利
+- `efficiency01_price_of_anarchy` - 无政府代价（Price of Anarchy）与稳定代价
+
+#### 第七章：协同博弈
+- `coop01_shapley_value` - 夏普利值（Shapley Value）与公平分配
+
+#### 第八章：匹配理论
+- `matching01_stable_matching` - 稳定匹配与 Gale-Shapley 算法
+
+#### 第九章：势博弈
+- `potential01_potential_function` - 势函数与最佳响应动态
+
 ### 安装
 
 ```bash
@@ -200,6 +212,18 @@ An interactive learning tool for Algorithmic Game Theory, inspired by Rustlings.
 
 #### Chapter 5: Mechanism Design
 - `mechanism01_vcg` - VCG Mechanism (Vickrey-Clarke-Groves)
+
+#### Chapter 6: Efficiency and Social Welfare
+- `efficiency01_price_of_anarchy` - Price of Anarchy and Price of Stability
+
+#### Chapter 7: Cooperative Games
+- `coop01_shapley_value` - Shapley Value and Fair Allocation
+
+#### Chapter 8: Matching Theory
+- `matching01_stable_matching` - Stable Matching and Gale-Shapley Algorithm
+
+#### Chapter 9: Potential Games
+- `potential01_potential_function` - Potential Functions and Best Response Dynamics
 
 ### Installation
 
