@@ -86,7 +86,9 @@ class AlgoGameTheoryTool:
             '06_efficiency': '第六章：效率与社会福利',
             '07_cooperative_games': '第七章：协同博弈',
             '08_matching': '第八章：匹配理论',
-            '09_potential_games': '第九章：势博弈'
+            '09_potential_games': '第九章：势博弈',
+            '10_network_games': '第十章：网络博弈',
+            '11_voting': '第十一章：投票理论'
         }
         return category_names.get(category, category)
 

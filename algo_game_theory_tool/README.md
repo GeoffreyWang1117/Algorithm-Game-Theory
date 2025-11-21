@@ -31,6 +31,7 @@
 #### 第二章：纳什均衡
 - `nash01_pure_nash` - 纯策略纳什均衡的计算
 - `nash02_iterative_elimination` - 重复剔除严格劣策略 (IESDS)
+- `nash03_correlated_equilibrium` - 相关均衡与协调机制
 
 #### 第三章：混合策略
 - `mixed01_expected_utility` - 混合策略与期望效用
@@ -48,12 +49,20 @@
 
 #### 第七章：协同博弈
 - `coop01_shapley_value` - 夏普利值（Shapley Value）与公平分配
+- `coop02_core` - 核心（Core）与稳定联盟
 
 #### 第八章：匹配理论
 - `matching01_stable_matching` - 稳定匹配与 Gale-Shapley 算法
 
 #### 第九章：势博弈
 - `potential01_potential_function` - 势函数与最佳响应动态
+
+#### 第十章：网络博弈
+- `network01_selfish_routing` - 自私路由与 Wardrop 均衡
+- `network02_congestion_games` - 拥塞博弈与 Rosenthal 定理
+
+#### 第十一章：投票理论
+- `voting01_voting_rules` - 投票规则与策略投票
 
 ### 安装
 
@@ -201,6 +210,7 @@ An interactive learning tool for Algorithmic Game Theory, inspired by Rustlings.
 #### Chapter 2: Nash Equilibrium
 - `nash01_pure_nash` - Computing pure strategy Nash equilibria
 - `nash02_iterative_elimination` - Iterated elimination of strictly dominated strategies
+- `nash03_correlated_equilibrium` - Correlated Equilibrium and coordination mechanisms
 
 #### Chapter 3: Mixed Strategies
 - `mixed01_expected_utility` - Mixed strategies and expected utility
@@ -218,12 +228,20 @@ An interactive learning tool for Algorithmic Game Theory, inspired by Rustlings.
 
 #### Chapter 7: Cooperative Games
 - `coop01_shapley_value` - Shapley Value and Fair Allocation
+- `coop02_core` - The Core and Stable Coalitions
 
 #### Chapter 8: Matching Theory
 - `matching01_stable_matching` - Stable Matching and Gale-Shapley Algorithm
 
 #### Chapter 9: Potential Games
 - `potential01_potential_function` - Potential Functions and Best Response Dynamics
+
+#### Chapter 10: Network Games
+- `network01_selfish_routing` - Selfish Routing and Wardrop Equilibrium
+- `network02_congestion_games` - Congestion Games and Rosenthal's Theorem
+
+#### Chapter 11: Voting Theory
+- `voting01_voting_rules` - Voting Rules and Strategic Voting
 
 ### Installation
 
