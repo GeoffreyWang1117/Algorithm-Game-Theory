@@ -1,0 +1,140 @@
+# 医院-住院医匹配配置
+
+# 匹配算法
+algorithm:
+  type: "resident_proposing"  # resident_proposing, hospital_proposing, roth_peranson
+
+  # Deferred Acceptance参数
+  deferred_acceptance:
+    max_iterations: 10000
+    check_stability: true
+
+  # Roth-Peranson (couples)
+  roth_peranson:
+    max_iterations: 1000
+    improvement_threshold: 0.001
+    allow_unstable_couples: false
+
+# 场景生成
+scenario:
+  num_residents: 100
+  num_hospitals: 30
+  num_couples: 10  # ~10% couples率
+
+  # 医院容量分布
+  hospital_capacity:
+    mean: 3
+    std: 2
+    min: 1
+    max: 15
+
+  # 偏好列表长度
+  preference_list_length:
+    residents: [10, 15]  # [min, max]
+    hospitals: [20, 50]
+
+# 偏好生成
+preferences:
+  # 住院医偏好因素
+  resident_factors:
+    reputation: 0.4        # 医院声誉
+    geography: 0.3         # 地理位置
+    specialty_match: 0.2   # 专科匹配
+    lifestyle: 0.1         # 工作生活平衡
+
+  # 医院偏好因素
+  hospital_factors:
+    step1_score: 0.5       # USMLE Step 1成绩
+    research: 0.2          # 研究经历
+    letters: 0.2           # 推荐信
+    interview: 0.1         # 面试表现
+
+  # 地理偏好
+  geography:
+    max_distance: 2000     # 最大可接受距离（英里）
+    home_state_bonus: 0.2  # 本州加成
+    region_preference:
+      northeast: 0.25
+      south: 0.20
+      midwest: 0.25
+      west: 0.30
+
+  # 噪声（模拟个人偏好差异）
+  noise:
+    std: 0.1
+    distribution: "gaussian"
+
+# Couples偏好
+couples:
+  # 联合偏好生成策略
+  strategy: "compromise"  # compromise, dominant, independent
+
+  # 地理约束
+  geography:
+    max_distance_between: 100  # 夫妻间最大距离（英里）
+    prefer_same_city: true
+    same_city_bonus: 0.3
+
+  # 生成联合偏好列表长度
+  joint_preference_length: 50
+
+# 稳定性检查
+stability:
+  # 检查类型
+  check_types:
+    - blocking_pairs
+    - weak_stability
+    - pareto_efficiency
+
+  # 容忍度（用于couples）
+  tolerance: 0.0
+
+# 评估指标
+metrics:
+  # 匹配质量
+  matching_quality:
+    - match_rate
+    - stability
+    - resident_satisfaction
+    - hospital_fill_rate
+
+  # Couples指标
+  couples_metrics:
+    - both_matched_rate
+    - distance_between
+    - joint_satisfaction
+
+  # 公平性
+  fairness:
+    - rank_distribution
+    - stratification_by_score
+
+# 模拟参数
+simulation:
+  # 重复次数（蒙特卡洛）
+  num_runs: 100
+
+  # 随机种子
+  seed: 42
+
+  # 并行计算
+  parallel: true
+  n_jobs: -1
+
+# 输出
+output:
+  save_matching: true
+  save_statistics: true
+  save_visualization: true
+
+  output_dir: "outputs"
+
+  formats:
+    matching: "json"  # json, csv
+    stats: "csv"
+    plots: "png"  # png, pdf
+
+# 日志
+logging:
+  level: "INFO"
+  file: "logs/matching.log"

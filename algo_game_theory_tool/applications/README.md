@@ -11,9 +11,9 @@
 ✅ **已完成**:
 - Citi Bike 共享单车再平衡系统
 - 广告拍卖系统 (GSP)
+- 医院-住院医匹配 (NRMP)
 
 ⏳ **计划中**:
-- 医院-住院医匹配 (NRMP)
 - 成本分摊系统 (Shapley Value)
 - 频谱拍卖系统 (FCC)
 
@@ -56,7 +56,17 @@ applications/
 │   ├── budget_pacing.py         # 预算优化
 │   └── run_demo.py              # 完整演示
 │
-├── hospital_matching/           # ⏳ 医院匹配（计划）
+├── hospital_matching/           # ✅ 医院-住院医匹配系统
+│   ├── README.md                # 详细文档
+│   ├── requirements.txt         # Python依赖
+│   │
+│   ├── configs/                 # 配置文件
+│   │   └── matching_config.yaml # 匹配算法配置
+│   │
+│   ├── deferred_acceptance.py   # DA算法实现
+│   ├── stability_checker.py     # 稳定性验证
+│   └── run_demo.py              # 完整演示
+│
 ├── cost_sharing/                # ⏳ 成本分摊（计划）
 └── spectrum_auction/            # ⏳ 频谱拍卖（计划）
 ```
