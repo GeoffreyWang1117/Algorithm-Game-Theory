@@ -1,0 +1,296 @@
+# Cost Sharing System Configuration
+# Configuration for Shapley value-based cost allocation applications
+
+# =============================================================================
+# Cloud Computing Cost Sharing
+# =============================================================================
+cloud_cost_sharing:
+  # Cost model parameters
+  cost_model:
+    fixed_cost_monthly: 50000  # Monthly data center fixed costs ($)
+    cpu_price_per_core: 30     # Price per vCPU per month ($)
+    memory_price_per_gb: 5     # Price per GB RAM per month ($)
+    storage_price_per_gb: 0.1  # Price per GB storage per month ($)
+    network_price_per_gbps: 100  # Price per Gbps bandwidth per month ($)
+    scale_discount_rate: 0.15  # Economies of scale discount rate (15% max)
+
+  # Customer scenarios
+  scenarios:
+    # Scenario 1: Small startup team
+    startup:
+      - id: 'web_app'
+        name: 'Web Application'
+        cpu_cores: 4
+        memory_gb: 16
+        storage_gb: 100
+        network_gbps: 1
+
+      - id: 'database'
+        name: 'Database Server'
+        cpu_cores: 8
+        memory_gb: 64
+        storage_gb: 500
+        network_gbps: 2
+
+      - id: 'analytics'
+        name: 'Analytics Pipeline'
+        cpu_cores: 16
+        memory_gb: 128
+        storage_gb: 1000
+        network_gbps: 5
+
+    # Scenario 2: Enterprise departments
+    enterprise:
+      - id: 'eng_team'
+        name: 'Engineering Team'
+        cpu_cores: 32
+        memory_gb: 128
+        storage_gb: 2000
+        network_gbps: 10
+        priority: 2
+
+      - id: 'data_science'
+        name: 'Data Science Team'
+        cpu_cores: 64
+        memory_gb: 512
+        storage_gb: 10000
+        network_gbps: 20
+        priority: 2
+
+      - id: 'web_services'
+        name: 'Web Services'
+        cpu_cores: 16
+        memory_gb: 64
+        storage_gb: 500
+        network_gbps: 50
+        priority: 1
+
+      - id: 'analytics'
+        name: 'Analytics Team'
+        cpu_cores: 24
+        memory_gb: 192
+        storage_gb: 5000
+        network_gbps: 5
+        priority: 1
+
+      - id: 'dev_test'
+        name: 'Dev/Test Environment'
+        cpu_cores: 8
+        memory_gb: 32
+        storage_gb: 200
+        network_gbps: 2
+        priority: 1
+
+  # Computation parameters
+  computation:
+    method: 'exact'  # 'exact', 'monte_carlo', 'incremental'
+    num_samples: 10000  # For Monte Carlo approximation
+    seed: 42
+
+
+# =============================================================================
+# Rideshare Cost Allocation
+# =============================================================================
+rideshare:
+  # Cost model parameters
+  cost_model:
+    base_fare: 5.0          # Base fare ($)
+    price_per_mile: 1.5     # Price per mile ($)
+    surge_multiplier: 1.0   # Surge pricing multiplier (1.0 = no surge)
+
+  # Origin location
+  origin:
+    name: 'Downtown Pickup Point'
+    lat: 37.7749
+    lon: -122.4194
+
+  # Rider scenarios
+  scenarios:
+    # Scenario 1: Morning commute
+    morning_commute:
+      - id: 'alice'
+        name: 'Alice'
+        pickup:
+          name: 'Alice Home'
+          lat: 37.7849
+          lon: -122.4094
+        dropoff:
+          name: 'Office Building A'
+          lat: 37.7949
+          lon: -122.3994
+        max_detour_miles: 3.0
+
+      - id: 'bob'
+        name: 'Bob'
+        pickup:
+          name: 'Bob Home'
+          lat: 37.7649
+          lon: -122.4294
+        dropoff:
+          name: 'Office Building A'
+          lat: 37.7949
+          lon: -122.3994
+        max_detour_miles: 5.0
+
+      - id: 'carol'
+        name: 'Carol'
+        pickup:
+          name: 'Carol Home'
+          lat: 37.7749
+          lon: -122.4394
+        dropoff:
+          name: 'Office Building B'
+          lat: 37.7999
+          lon: -122.3944
+        max_detour_miles: 4.0
+
+      - id: 'dave'
+        name: 'Dave'
+        pickup:
+          name: 'Dave Home'
+          lat: 37.7949
+          lon: -122.4244
+        dropoff:
+          name: 'Office Building A'
+          lat: 37.7949
+          lon: -122.3994
+        max_detour_miles: 6.0
+
+    # Scenario 2: Airport shuttle
+    airport_shuttle:
+      - id: 'passenger1'
+        name: 'Passenger 1'
+        pickup:
+          name: 'Hotel Downtown'
+          lat: 37.7849
+          lon: -122.4094
+        dropoff:
+          name: 'SFO Airport'
+          lat: 37.6213
+          lon: -122.3790
+        max_detour_miles: 10.0
+
+      - id: 'passenger2'
+        name: 'Passenger 2'
+        pickup:
+          name: 'Business District'
+          lat: 37.7949
+          lon: -122.3994
+        dropoff:
+          name: 'SFO Airport'
+          lat: 37.6213
+          lon: -122.3790
+        max_detour_miles: 12.0
+
+      - id: 'passenger3'
+        name: 'Passenger 3'
+        pickup:
+          name: 'Residential Area'
+          lat: 37.7749
+          lon: -122.4394
+        dropoff:
+          name: 'SFO Airport'
+          lat: 37.6213
+          lon: -122.3790
+        max_detour_miles: 15.0
+
+  # Computation parameters
+  computation:
+    method: 'exact'  # 'exact', 'monte_carlo', 'incremental'
+    num_samples: 5000
+    seed: 42
+
+
+# =============================================================================
+# Shapley Value Computation
+# =============================================================================
+shapley_computation:
+  # Algorithm selection based on problem size
+  algorithm_selection:
+    exact_threshold: 12      # Use exact for n ≤ 12
+    incremental_threshold: 10  # Use incremental for n ≤ 10
+    default_samples: 10000   # Default Monte Carlo samples for large n
+
+  # Monte Carlo parameters
+  monte_carlo:
+    min_samples: 1000
+    max_samples: 100000
+    convergence_threshold: 0.01  # Stop if error < 1%
+
+  # Performance settings
+  performance:
+    cache_enabled: true
+    parallel_computation: false  # Set true for multiprocessing
+    num_workers: 4
+
+
+# =============================================================================
+# Visualization
+# =============================================================================
+visualization:
+  output_dir: 'visualization'
+
+  # Plot settings
+  figure_size:
+    width: 14
+    height: 10
+
+  dpi: 300
+
+  # Style
+  style: 'whitegrid'  # seaborn style
+
+  # Colors
+  colors:
+    shapley: 'steelblue'
+    proportional: 'coral'
+    equal_split: 'mediumseagreen'
+    savings: 'green'
+    loss: 'red'
+
+  # Font sizes
+  font_sizes:
+    title: 14
+    axis_label: 12
+    tick_label: 10
+    legend: 10
+
+
+# =============================================================================
+# Analysis
+# =============================================================================
+analysis:
+  # Fairness properties to verify
+  verify_properties:
+    - 'efficiency'           # Σφᵢ = v(N)
+    - 'individual_rationality'  # φᵢ ≤ c({i})
+    - 'core_membership'      # No blocking coalitions
+    - 'symmetry'            # Symmetric players get equal value
+
+  # Tolerance for numerical comparisons
+  numerical_tolerance: 1.0e-6
+
+  # Comparison methods
+  comparison_methods:
+    - 'shapley'       # Shapley value
+    - 'proportional'  # Proportional to resource usage
+    - 'equal_split'   # Everyone pays equally
+    - 'standalone'    # No sharing (baseline)
+
+
+# =============================================================================
+# Output
+# =============================================================================
+output:
+  # Report format
+  report_format: 'text'  # 'text', 'json', 'csv'
+
+  # Precision for monetary values
+  monetary_precision: 2
+
+  # Precision for percentages
+  percentage_precision: 1
+
+  # Save results
+  save_results: true
+  results_dir: 'results'
