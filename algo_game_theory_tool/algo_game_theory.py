@@ -88,7 +88,8 @@ class AlgoGameTheoryTool:
             '08_matching': '第八章：匹配理论',
             '09_potential_games': '第九章：势博弈',
             '10_network_games': '第十章：网络博弈',
-            '11_voting': '第十一章：投票理论'
+            '11_voting': '第十一章：投票理论',
+            '12_applications': '第十二章：实际应用 🌟'
         }
         return category_names.get(category, category)
 

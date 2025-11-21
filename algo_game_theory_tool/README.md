@@ -64,6 +64,22 @@
 #### 第十一章：投票理论
 - `voting01_voting_rules` - 投票规则与策略投票
 
+#### 第十二章：实际应用 🌟
+- `app01_ad_auction` - 广告拍卖系统（GSP机制，Google/Facebook应用）
+- `app02_hospital_resident_matching` - 医院-住院医匹配（NRMP，诺贝尔奖应用）
+- `app03_cost_sharing` - 网络成本分摊（Shapley值应用）
+- `app04_bike_sharing_rebalancing` - 共享单车再平衡激励机制（Mobike/Citi Bike应用）
+- `app05_spectrum_auction` - 频谱拍卖（FCC频谱拍卖，$2000亿+规模）
+
+### 参考答案 📝
+
+所有应用题在 `solutions/` 目录下都提供了完整的参考实现：
+- `app01_ad_auction_solution.py` - 广告拍卖完整实现
+- `app02_hospital_resident_matching_solution.py` - 医院匹配完整实现
+- `app03_cost_sharing_solution.py` - 成本分摊完整实现
+- `app04_bike_sharing_rebalancing_solution.py` - 共享单车再平衡完整实现
+- `app05_spectrum_auction_solution.py` - 频谱拍卖完整实现
+
 ### 安装
 
 ```bash
@@ -242,6 +258,22 @@ An interactive learning tool for Algorithmic Game Theory, inspired by Rustlings.
 
 #### Chapter 11: Voting Theory
 - `voting01_voting_rules` - Voting Rules and Strategic Voting
+
+#### Chapter 12: Real-World Applications 🌟
+- `app01_ad_auction` - Sponsored Search Auction (GSP mechanism, Google/Facebook)
+- `app02_hospital_resident_matching` - Hospital-Resident Matching (NRMP, Nobel Prize application)
+- `app03_cost_sharing` - Network Cost Sharing (Shapley value application)
+- `app04_bike_sharing_rebalancing` - Bike Sharing Rebalancing Incentives (Mobike/Citi Bike application)
+- `app05_spectrum_auction` - Spectrum Auction (FCC auctions, $200B+ scale)
+
+### Reference Solutions 📝
+
+Complete reference implementations are provided in the `solutions/` directory:
+- `app01_ad_auction_solution.py` - Full ad auction implementation
+- `app02_hospital_resident_matching_solution.py` - Full hospital matching implementation
+- `app03_cost_sharing_solution.py` - Full cost sharing implementation
+- `app04_bike_sharing_rebalancing_solution.py` - Full bike sharing rebalancing implementation
+- `app05_spectrum_auction_solution.py` - Full spectrum auction implementation
 
 ### Installation
 
