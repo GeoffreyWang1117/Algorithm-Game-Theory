@@ -1,0 +1,98 @@
+# Spectrum Auction Configuration
+
+# =============================================================================
+# Auction Parameters
+# =============================================================================
+auction:
+  num_items: 12  # Number of spectrum licenses
+  num_bidders: 8  # Number of participating telecom companies
+
+  # Bid generation
+  bid_generation:
+    bids_per_bidder: 4  # Number of bids each bidder submits
+    max_bundle_size: 5  # Maximum licenses in a bundle
+    value_range: [10, 250]  # Min and max bid values ($M)
+    seed: 42  # Random seed for reproducibility
+
+  # WDP solver configuration
+  wdp_solver:
+    method: 'auto'  # 'auto', 'greedy', 'greedy_value', 'exhaustive', 'branch_and_bound'
+    time_limit: 10.0  # Time limit for branch-and-bound (seconds)
+
+  # VCG pricing
+  vcg_pricing:
+    enabled: true
+    verify_properties: true  # Verify truthfulness, IR, efficiency
+
+
+# =============================================================================
+# FCC-Style Auction Scenarios
+# =============================================================================
+fcc_scenarios:
+  # Auction 73 (700 MHz, 2008)
+  auction_73:
+    num_items: 12  # Major US regions
+    num_bidders: 8
+    large_carriers: 2  # National carriers
+    regional_carriers: 6
+    total_historical_revenue: 19600  # $19.6B actual
+
+  # Incentive Auction (2016-2017)
+  incentive_auction:
+    num_items: 84  # More granular licenses
+    num_bidders: 15
+    two_sided: true  # Broadcasters sell, carriers buy
+    total_historical_revenue: 19800  # $19.8B actual
+
+  # 5G mmWave Auction (2020)
+  auction_5g:
+    num_items: 20
+    num_bidders: 12
+    spectrum_band: '24GHz-47GHz'
+
+
+# =============================================================================
+# Algorithm Performance Settings
+# =============================================================================
+performance:
+  # Threshold for algorithm selection
+  exhaustive_threshold: 15  # Use exhaustive only if bids ≤ 15
+  branch_and_bound_threshold: 50  # Use B&B if bids ≤ 50
+
+  # Parallel computation
+  parallel: false
+  num_workers: 4
+
+  # Caching
+  cache_enabled: true
+
+
+# =============================================================================
+# Visualization
+# =============================================================================
+visualization:
+  output_dir: 'visualization'
+
+  figure_size:
+    width: 14
+    height: 10
+
+  dpi: 300
+
+  style: 'whitegrid'
+
+  colors:
+    wdp_algorithms: ['steelblue', 'coral', 'mediumseagreen', 'gold', 'purple']
+    vcg: 'steelblue'
+    first_price: 'coral'
+    revenue: 'mediumseagreen'
+
+
+# =============================================================================
+# Output Settings
+# =============================================================================
+output:
+  format: 'text'  # 'text', 'json', 'csv'
+  monetary_precision: 1  # Decimal places for $ amounts
+  save_results: true
+  results_dir: 'results'
